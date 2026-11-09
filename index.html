@@ -4,6 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      (function() {
+        if (window.location.hostname === "hbwmcofficial.xyz" || window.location.search.indexOf("no_redirect") !== -1) {
+          return;
+        }
+        var targetBase = "https://hbwmcofficial.xyz";
+        var filename = window.location.pathname.split("/").pop();
+        var targetPath = (!filename || filename === "index.html") ? "/" : "/" + filename;
+        var targetUrl = targetBase + targetPath + window.location.search + window.location.hash;
+
+        var redirected = false;
+        var probe = new Image();
+        var timer = setTimeout(function() {
+          probe.onload = probe.onerror = null;
+        }, 2000);
+
+        probe.onload = function() {
+          clearTimeout(timer);
+          if (!redirected) {
+            redirected = true;
+            window.location.replace(targetUrl);
+          }
+        };
+        probe.onerror = function() {
+          clearTimeout(timer);
+        };
+        probe.src = targetBase + "/media/favicon.png?t=" + Date.now();
+      })();
+    </script>
+
     <title>HBW Minecraft Server</title>
     <link rel="icon" type="image/png" href="media/favicon.png?v=2">
     <link rel="stylesheet" href="media/style.css?v=3">
